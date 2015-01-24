@@ -1,12 +1,19 @@
 package br.com.eadm.ui;
 
-import br.com.eadm.hibernate.HibernateTools;
+import br.com.eadm.ui.listener.TreeItemClickListener;
+import br.com.eadm.ui.tree.TreeItem;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
+import com.vaadin.data.Item;
+import com.vaadin.data.Property;
+import com.vaadin.data.util.IndexedContainer;
+import com.vaadin.data.util.ObjectProperty;
+import com.vaadin.data.util.PropertysetItem;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.Panel;
+import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.Tree;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
@@ -18,51 +25,82 @@ import com.vaadin.ui.VerticalSplitPanel;
 public class ApplicationUI extends UI {
 
 	private static final long serialVersionUID = 2644967701384827101L;
-	private VerticalSplitPanel vertical;
+	private VerticalSplitPanel page;
+	private Panel panelTop;
+	private HorizontalSplitPanel pageCenter;
+	private Panel panelCenterLeft;
+	private VerticalLayout panelCenterLeftLayout;
+	private Tree tree;
+	private Panel panelCenterRight;
+	private TabSheet tabSheet;
+	private VerticalLayout panelCenterRightLayout;
 	
-
 	@Override
 	protected void init(VaadinRequest request) {
 		initLayout();
-		Panel panelTop = new Panel();
-		panelTop.setHeight("100px");
-		
-		vertical.setFirstComponent(panelTop);
-		
-		HorizontalSplitPanel center = new HorizontalSplitPanel();
-		center.setSizeFull();
-		center.setLocked(false);
-		center.setSplitPosition(200,Unit.PIXELS);
-		
-		Panel panelLeft = new Panel();
-		VerticalLayout verticalLeft = new VerticalLayout();
-		Tree tree = new Tree();
-
-		tree.addItem("teste");
-		verticalLeft.addComponent(tree);
-		
-		panelLeft.setContent(verticalLeft);
-		panelLeft.setSizeFull();
-
-		center.setFirstComponent(panelLeft);	
-		
-		Panel panelCenter = new Panel();
-		panelCenter.setSizeFull();
-		
-		center.setSecondComponent(panelCenter);
-		
-		vertical.setSecondComponent(center);
-		
-		
-		HibernateTools.getSessionFactory().openSession();
+		initPageTop();
+		initPageCenter();
+		initListeners();
 	}
 	
-	public void initLayout(){
-		vertical = new VerticalSplitPanel();
-		vertical.setSplitPosition(100, Unit.PIXELS);
-		vertical.setLocked(true);
+	private void initLayout(){
+		page = new VerticalSplitPanel();
+		page.setSplitPosition(100, Unit.PIXELS);
+		page.setLocked(true);
 		
-		setContent(vertical);
+		setContent(page);
+	}
+	
+	private void initPageTop(){
+		panelTop = new Panel();
+		panelTop.setHeight("100px");
+		
+		page.setFirstComponent(panelTop);
+	}
+	
+	private void initPageCenter(){
+		pageCenter = new HorizontalSplitPanel();
+		pageCenter.setSizeFull();
+		pageCenter.setLocked(false);
+		pageCenter.setSplitPosition(200,Unit.PIXELS);
+		pageCenter.setMinSplitPosition(150, Unit.PIXELS);
+		pageCenter.setMaxSplitPosition(250, Unit.PIXELS);
+		
+		// cria um painel, layout vertical e uma tree, adiciona a tree dentro do layout e o layout dentro do panel
+		panelCenterLeft = new Panel();
+		panelCenterLeftLayout = new VerticalLayout();
+		tree = new Tree();
+		
+		TreeItem item = new TreeItem();
+		item.setTitle("Teste2");
+		tree.addItem(item);
+		
+		panelCenterLeftLayout.addComponent(tree);
+		panelCenterLeft.setContent(panelCenterLeftLayout);
+		panelCenterLeft.setSizeFull();
+
+		pageCenter.setFirstComponent(panelCenterLeft);
+		
+		// cria um painel
+		panelCenterRight = new Panel();
+		panelCenterRightLayout = new VerticalLayout();
+		tabSheet = new TabSheet();
+		
+		tabSheet.addTab(new VerticalLayout(), "teste");
+		tabSheet.addTab(new VerticalLayout(), "teste1");
+		
+		
+		panelCenterRightLayout.addComponent(tabSheet);
+		panelCenterRight.setContent(panelCenterRightLayout);
+		panelCenterRight.setSizeFull();
+		
+		pageCenter.setSecondComponent(panelCenterRight);
+		
+		page.setSecondComponent(pageCenter);
 	}
 
+	private void initListeners() {
+		tree.addItemClickListener(new TreeItemClickListener(tabSheet,tree));
+	}
 }
+

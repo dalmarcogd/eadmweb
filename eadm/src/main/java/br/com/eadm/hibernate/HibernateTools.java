@@ -25,7 +25,7 @@ public class HibernateTools {
 	private static final String password = "root";
 	private static final String showSQL = "true";
 	private static final String formatSQL = "true";
-	private static final String hbm2ddl = "auto";
+	private static final String hbm2ddl = "auto"; 
 	
 	@PostConstruct
 	private static SessionFactory buildSessionFactory() {

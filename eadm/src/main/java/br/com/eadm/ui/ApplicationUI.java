@@ -2,14 +2,11 @@ package br.com.eadm.ui;
 
 import br.com.eadm.ui.listener.TreeItemClickListener;
 import br.com.eadm.ui.tree.TreeItem;
+import br.com.eadm.view.image.ImageIcons;
+import br.com.eadm.view.usuario.UsuarioPageContent;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
-import com.vaadin.data.Item;
-import com.vaadin.data.Property;
-import com.vaadin.data.util.IndexedContainer;
-import com.vaadin.data.util.ObjectProperty;
-import com.vaadin.data.util.PropertysetItem;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.Panel;
@@ -53,8 +50,7 @@ public class ApplicationUI extends UI {
 	
 	private void initPageTop(){
 		panelTop = new Panel();
-		panelTop.setHeight("100px");
-		
+		panelTop.setSizeFull();
 		page.setFirstComponent(panelTop);
 	}
 	
@@ -70,9 +66,13 @@ public class ApplicationUI extends UI {
 		panelCenterLeft = new Panel();
 		panelCenterLeftLayout = new VerticalLayout();
 		tree = new Tree();
+		tree.setMultiSelect(false);
 		
 		TreeItem item = new TreeItem();
 		item.setTitle("Teste2");
+		item.setTitileTab("TEste2");
+		item.setTabPage(UsuarioPageContent.class);
+		item.setIconTab(ImageIcons.getResourceIcon("user.png"));
 		tree.addItem(item);
 		
 		panelCenterLeftLayout.addComponent(tree);
@@ -100,7 +100,7 @@ public class ApplicationUI extends UI {
 	}
 
 	private void initListeners() {
-		tree.addItemClickListener(new TreeItemClickListener(tabSheet,tree));
+		tree.addItemClickListener(new TreeItemClickListener(tabSheet));
 	}
 }
 

@@ -1,7 +1,8 @@
 package br.com.eadm.basic.business;
 
-import br.com.eadm.exception.ExceptionError;
+import br.com.eadm.exception.ValidationError;
+
 
 public interface BasicBusinessRule {
-	public ExceptionError validate();
+	public ValidationError validate();
 }

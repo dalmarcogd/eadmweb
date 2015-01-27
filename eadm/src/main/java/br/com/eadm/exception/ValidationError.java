@@ -1,6 +1,6 @@
 package br.com.eadm.exception;
 
-public class ExceptionError {
+public class ValidationError{
 	private String error;
 
 	public String getError() {

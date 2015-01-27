@@ -1,9 +1,11 @@
 package br.com.eadm.basic.dao;
 
-import br.com.eadm.basic.business.BasicBaseKnowledge;
+import java.util.List;
+
+import br.com.eadm.basic.entity.BasicEntity;
+import br.com.eadm.exception.ValidationError;
 
 public interface BasicDAO {
-	public void update(BasicBaseKnowledge knowledge);
-	public void delete(BasicBaseKnowledge knowledge);
-	public void save(BasicBaseKnowledge knowledge);
+	public List<ValidationError> delete(BasicEntity basicEntity);
+	public List<ValidationError> save(BasicEntity basicEntity);
 }

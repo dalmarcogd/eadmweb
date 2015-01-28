@@ -1,4 +1,4 @@
-package br.com.eadm.view.image;
+package br.com.eadm.image;
 
 import java.io.File;
 

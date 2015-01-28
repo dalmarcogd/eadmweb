@@ -2,7 +2,7 @@ package br.com.eadm.view.usuario;
 
 import com.vaadin.ui.Panel;
 
-import br.com.eadm.ui.page.tab.content.AbstractPageContent;
+import br.com.eadm.ui.tabsheet.tab.AbstractPageContent;
 
 public class UsuarioPageContent extends AbstractPageContent {
 

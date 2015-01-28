@@ -13,6 +13,5 @@ import br.com.eadm.basic.entity.BasicEntity;
 @Target(ElementType.TYPE)
 public @interface KnowledgeEntity {
 
-
 	Class<? extends BasicEntity> getType(); 
 }

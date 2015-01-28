@@ -1,4 +1,4 @@
-package br.com.eadm.ui.page.tab.content;
+package br.com.eadm.ui.tabsheet.tab;
 
 import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalSplitPanel;

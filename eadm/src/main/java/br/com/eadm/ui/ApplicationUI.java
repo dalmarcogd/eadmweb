@@ -1,8 +1,8 @@
 package br.com.eadm.ui;
 
+import br.com.eadm.image.ImageIcons;
 import br.com.eadm.ui.listener.TreeItemClickListener;
 import br.com.eadm.ui.tree.TreeItem;
-import br.com.eadm.view.image.ImageIcons;
 import br.com.eadm.view.usuario.UsuarioPageContent;
 
 import com.vaadin.annotations.Theme;

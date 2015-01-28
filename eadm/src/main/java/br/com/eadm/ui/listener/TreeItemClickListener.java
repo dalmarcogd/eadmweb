@@ -29,7 +29,9 @@ public class TreeItemClickListener implements ItemClickListener {
 				newTab.setClosable(true);
 				tabSheet.setSelectedTab(newTab);
 				tabSheet.focus();
-			} catch (InstantiationException | IllegalAccessException e) {
+			} catch (InstantiationException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
 				e.printStackTrace();
 			}
 		}

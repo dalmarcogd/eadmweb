@@ -3,6 +3,7 @@ package br.com.eadm.ui.tree;
 import com.vaadin.server.Resource;
 
 public class TreeItem {
+	
 	private Class<?> tabPage;
 	private String title;
 	private String titileTab;

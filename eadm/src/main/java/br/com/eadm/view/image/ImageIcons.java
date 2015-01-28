@@ -10,7 +10,7 @@ public class ImageIcons {
 	public static Resource getResourceIcon(String file){
 		FileResource fileResource;
 		try {
-			fileResource = new FileResource(new File(ImageIcons.class.getResource("/image/"+file).getPath()));
+			fileResource = new FileResource(new File(ImageIcons.class.getResource("/br.com.eadm.image/"+file).getPath()));
 			return fileResource;
 		} catch (Exception e) {
 			e.printStackTrace();

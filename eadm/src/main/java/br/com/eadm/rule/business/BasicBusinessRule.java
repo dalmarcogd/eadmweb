@@ -1,4 +1,4 @@
-package br.com.eadm.basic.business;
+package br.com.eadm.rule.business;
 
 import br.com.eadm.exception.ValidationError;
 

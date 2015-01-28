@@ -1,12 +1,13 @@
-package br.com.eadm.basic.business;
+package br.com.eadm.rule.knowledge;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.eadm.basic.entity.BasicEntity;
 import br.com.eadm.exception.ValidationError;
+import br.com.eadm.rule.business.BasicBusinessRule;
 
-public abstract class BasicBaseKnowledge{
+public abstract class BaseKnowledge{
 	
 	
 	private List<BasicBusinessRule> listSaveRules = new ArrayList<BasicBusinessRule>();

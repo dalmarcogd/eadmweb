@@ -1,5 +1,6 @@
 package br.com.eadm.ui;
 
+import br.com.eadm.hibernate.HibernateTools;
 import br.com.eadm.image.ImageIcons;
 import br.com.eadm.ui.listener.TreeItemClickListener;
 import br.com.eadm.ui.tree.TreeItem;
@@ -20,7 +21,7 @@ import com.vaadin.ui.VerticalSplitPanel;
 @Title(value="e-Adm")
 @Theme("eadmtheme")
 public class ApplicationUI extends UI {
-
+	
 	private static final long serialVersionUID = 2644967701384827101L;
 	private VerticalSplitPanel page;
 	private Panel panelTop;
@@ -97,10 +98,14 @@ public class ApplicationUI extends UI {
 		pageCenter.setSecondComponent(panelCenterRight);
 		
 		page.setSecondComponent(pageCenter);
+		
+		HibernateTools.getSessionFactory().openSession();
+		HibernateTools.updateSchemma();
 	}
 
 	private void initListeners() {
 		tree.addItemClickListener(new TreeItemClickListener(tabSheet));
 	}
 }
+
 

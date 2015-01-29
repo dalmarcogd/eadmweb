@@ -1,17 +1,21 @@
 package br.com.eadm.hibernate;
 
+import java.util.Iterator;
+import java.util.Set;
+
 import javax.annotation.PostConstruct;
+import javax.persistence.Entity;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.mapping.PersistentClass;
 import org.hibernate.tool.hbm2ddl.SchemaUpdate;
-import org.hibernate.tool.hbm2ddl.SchemaValidator;
+import org.reflections.Reflections;
 
-import br.com.eadm.basic.dao.BasicDAO;
-import br.com.eadm.basic.entity.BasicEntity;
+import br.com.eadm.dao.BasicDAO;
 
 public class HibernateTools {
 	
@@ -22,12 +26,12 @@ public class HibernateTools {
 	private static final String driver = "com.mysql.jdbc.Driver";
 	private static final String url = "jdbc:mysql://localhost:3306/eadm";
 	private static final String username = "root";
-	private static final String password = "root";
+	private static final String password = "1";
 	private static final String showSQL = "true";
 	private static final String formatSQL = "true";
-	private static final String hbm2ddl = "auto"; 
+	private static final String hbm2ddl = "true"; 
 	
-	@PostConstruct
+	//@PostConstruct
 	private static SessionFactory buildSessionFactory() {
 		
 		configuration = new Configuration();
@@ -45,7 +49,13 @@ public class HibernateTools {
 		configuration.setProperty("hibernate.hbm2ddl.auto",hbm2ddl);
 		
 		//classes a serem mapeadas
-		configuration.addAnnotatedClass(BasicEntity.class);
+		
+		Reflections reflections = new Reflections("br.com.eadm.model");
+		Set<Class<?>> typesAnnotatedWith = reflections.getTypesAnnotatedWith(Entity.class);
+		
+		for (Class<?> class1 : typesAnnotatedWith) {
+			configuration.addAnnotatedClass(class1.getClass());
+		}
 		
 		StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
 		
@@ -58,17 +68,11 @@ public class HibernateTools {
 	
 	public static void updateSchemma(){
 		try {
-			SchemaValidator seValidator = new SchemaValidator(configuration);
-			seValidator.validate();
-		} catch (Exception e) {
-			try {
-				SchemaUpdate seUpdate = new SchemaUpdate(configuration);
-				seUpdate.execute(true, true);
-				return;
-			} catch (Exception e2) {
-				e2.printStackTrace();
-				}
-			}
+			SchemaUpdate seUpdate = new SchemaUpdate(configuration,configuration.getProperties());
+			seUpdate.execute(true, true);
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
 	}
 	
 	public void saveOrUpdate(BasicDAO basicDAO){

@@ -1,4 +1,4 @@
-package br.com.eadm.basic.entity;
+package br.com.eadm.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

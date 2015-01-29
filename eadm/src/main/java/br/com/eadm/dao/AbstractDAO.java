@@ -1,4 +1,4 @@
-package br.com.eadm.basic.dao;
+package br.com.eadm.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +7,8 @@ import java.util.Set;
 import org.reflections.Reflections;
 
 import br.com.eadm.annotation.KnowledgeEntity;
-import br.com.eadm.basic.entity.BasicEntity;
 import br.com.eadm.exception.ValidationError;
+import br.com.eadm.model.BasicEntity;
 import br.com.eadm.rule.knowledge.BaseKnowledge;
 
 public class AbstractDAO<T extends BasicEntity> implements BasicDAO{

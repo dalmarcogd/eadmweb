@@ -6,7 +6,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import br.com.eadm.basic.entity.BasicEntity;
+import br.com.eadm.model.BasicEntity;
 
 
 @Retention(RetentionPolicy.RUNTIME)
